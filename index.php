@@ -19,8 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link active" href="#">Home</a>
-            <a class="nav-item nav-link" href="#">Features</a>
-            <a class="nav-item nav-link" href="#">Pricing</a>
+            <a class="nav-item nav-link" href="#">Contact Us</a>
             <form class="form-inline" style="white-space:nowrap;">
                 <input class="form-control mr-sm-2" type="search" size="30" placeholder="Search Doctors..." aria-label="Search">
             </form>
@@ -35,6 +34,10 @@
 
 <body>
     
+
+    <?php echo "hello world" ?>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
 
