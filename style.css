@@ -8,8 +8,10 @@ h1 {
     text-align: center;
     color: black;
     font-weight: 350;
-    margin: 3%;
+    margin: 1%;
 }
+
+
 
 div{
     margin: 0 auto
@@ -23,7 +25,6 @@ div{
 h2 {
     color: black;
     text-align: center;
-    margin: 3%
 }
 
 .dark-theme > p, .dark-theme > h1, .dark-theme > ul, .dark-theme > h2, .dark-theme h2{

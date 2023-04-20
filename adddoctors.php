@@ -18,8 +18,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/index.php">Home</a>
-            <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
+            <a class="nav-item nav-link" href="/index.php">Home</a>
+            <a class="nav-item nav-link active" href="/adddoctors.php">Add Doctors</a>
             <a class="nav-item nav-link" href="/contact.php">Contact Us</a>
             <form class="form-inline" style="white-space:nowrap;">
                 <input class="form-control mr-sm-2" type="search" size="30" placeholder="Search Doctors..." aria-label="Search">
@@ -34,63 +34,63 @@
 </header>
 
 <body>
-    
-
-    <?php echo "hello world" ?>
 	
-	<table>
-    <tr>
-    <td>First Name</td>
-    <td>Last Name</td>
-    <td>Specialization</td>
-    <td>Location</td>
-    </tr>
+    <h1>Add Doctors</h1>
+
     <?php
-  
-    // Server name must be localhost
-    $servername = "localhost";
-    
-    // In my case, user name will be root
-    $username = "root";
-    
-    // Password is empty
-    $password = "";
+    include_once 'db.php';
+    $successMessage = "";
 
-    $db="ratemydoctor";
-    
-    // Creating a connection
-    $conn = new mysqli($servername, 
-                $username, $password);
-    
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failure: " 
-            . $conn->connect_error);
-    } 
-	
-	
-	$sql = "USE ratemydoctor";
-    $try= $conn->query($sql);
-	
-    $sql = "SELECT * FROM doctor";
-    $result = $conn->query($sql);
+    if (isset($_POST['submit'])) {
+        if(!$conn)
+            echo mysql_error($conn);
 
+        //validated your inputs fields
+        $first = $_POST['first'];
+        $last = $_POST['last'];
+        $specialization = $_POST['specialization'];
+        $location = $_POST['location'];
+
+        //prepare and bind 
+        $sql = $conn->prepare("INSERT INTO doctor (FirstName,LastName,Specialization, Location) VALUES (?,?,?,?)");
+        $sql->bind_param("ssss", $first, $last, $specialization, $location);
+
+        if ($sql->execute()) {
+            echo("Doctor has been added");
+        }
+
+        $sql->close();
+        $conn->close();
+}
+
+?>
+
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
+    <div class="mx-5 mb-3 mt-5 row">
+        <div class="col">
+            <input type="text" class="form-control" name="first" placeholder="First Name">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" name="last" placeholder="Last Name">
+        </div>
+    </div>  
+
+    <div class="mx-5 mb-3 row">
+        <div class="col">
+            <input type="text" class="form-control" name="specialization" placeholder="Specialization">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" name="location" placeholder="Location">
+        </div>
+    </div>  
+    
+    <div class="d-grid gap-2 mx-5">
+        <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
+    </div>
+    </form>
 
     
-    if($result->num_rows > 0){
-    while($results = $result->fetch_assoc()){
-    //echo "<tr><td>".$results['DoctorID']."</td>";
-    echo "<td>".$results['FirstName']."</td>";
-    echo "<td>".$results['LastName']."</td>";
-    echo "<td>".$results['Specialization']."</td>";
-    echo "<td>".$results['Location']."</td></tr>";
-    }
-    }
-    
-    
-    // Closing connection
-    $conn->close();
-    ?>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
