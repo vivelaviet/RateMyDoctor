@@ -11,7 +11,9 @@ h1 {
     margin: 1%;
 }
 
-
+.tabledis {
+display: table; /* 2. display flex to the rescue */
+}
   
 form {
     display: flex; /* 2. display flex to the rescue */

@@ -17,16 +17,35 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link" href="/index.php">Home</a>
-            <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
-            <a class="nav-item nav-link active" href="/contact.php">Contact Us</a>
-            <form class="form-inline" style="white-space:nowrap;">
-                <input class="form-control mr-sm-2" type="search" size="30" placeholder="Search Doctors..." aria-label="Search">
-            </form>
-            <form class="form-inline" style="white-space:nowrap;">
-                <input class="form-control mr-sm-2" type="search" size="6" placeholder="Zipcode" aria-label="Search">
-            </form>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <div class="row">
+                <div class="col">
+                    <a class="nav-item nav-link" href="/index.php">Home</a>
+                </div>
+                <div class="col">
+                    <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
+                </div>
+                <div class="col">
+                    <a class="nav-item nav-link active" href="/contact.php">Contact Us</a>
+                </div>
+                <div class="col">
+                    <a class="nav-item nav-link" href="/login.php">Login</a>
+                </div>
+                <div class="col">
+                
+                    <form class="form-inline" style="white-space:nowrap;">
+                        <div class="col-md-auto">
+                            <input class="form-control mr-sm-2" type="search" size="30" placeholder="Search Doctors..." aria-label="Search">
+                        </div>
+                        <div class="col-md-auto">
+                            <input class="form-control mr-sm-2" type="search" size="6" placeholder="Location" aria-label="Search">
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </div>
+                    </form>
+
+                </div>
+                
           </div>
         </div>
       </nav>
