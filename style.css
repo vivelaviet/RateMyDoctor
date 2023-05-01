@@ -11,12 +11,18 @@ h1 {
     margin: 1%;
 }
 
-
-
-div{
-    margin: 0 auto
+.tabledis {
+display: table; /* 2. display flex to the rescue */
 }
-
+  
+form {
+    display: flex; /* 2. display flex to the rescue */
+    flex-direction: row;
+  }
+  
+  label, input {
+    display: block; /* 1. oh noes, my inputs are styled as block... */
+  }
 
 .dark-theme {
     background-color: #202a4d;
