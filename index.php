@@ -53,9 +53,6 @@
 </header>
 
 <body>
-    
-
-    <?php echo "hello world" ?>
 	
 	<table>
     <tr>
