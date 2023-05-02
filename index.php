@@ -35,10 +35,13 @@
                 
                     <form class="form-inline" style="white-space:nowrap;">
                         <div class="col-md-auto">
-                            <input class="form-control mr-sm-2" type="search" size="30" placeholder="Search Doctors..." aria-label="Search">
+                            <input class="form-control mr-sm-2" type="search" size="15" name="FnameInput" placeholder="Search First Name" aria-label="Search">
                         </div>
                         <div class="col-md-auto">
-                            <input class="form-control mr-sm-2" type="search" size="6" placeholder="Location" aria-label="Search">
+                            <input class="form-control mr-sm-2" type="search" size="15" name="LnameInput" placeholder="Search Last Name" aria-label="Search">
+                        </div>
+                        <div class="col-md-auto">
+                            <input class="form-control mr-sm-2" type="search" size="8" placeholder="Location" aria-label="Search">
                         </div>
                         <div class="col">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -85,23 +88,35 @@
     } 
 	
 	
-	$sql = "USE ratemydoctor";
-    $try= $conn->query($sql);
-	
-    $sql = "SELECT * FROM doctor";
-    $result = $conn->query($sql);
-
-
+    if (isset($_GET['FnameInput']) || isset($_GET['LnameInput'])) {
+        $sql = "USE ratemydoctor";
+        $try= $conn->query($sql);
+        
+        // Check if first name is provided
+        if (isset($_GET['FnameInput'])) {
+            $fname = $_GET['FnameInput'];
+            $whereClause = "WHERE FirstName LIKE '%" . $fname . "%'";
+        }
+        
+        // Check if last name is provided
+        if (isset($_GET['LnameInput'])) {
+            $lname = $_GET['LnameInput'];
+            $whereClause = (isset($whereClause) ? $whereClause . " AND " : "WHERE ") . "LastName LIKE '%" . $lname . "%'";
+        }
+        
+        $sql = "SELECT * FROM doctor " . $whereClause;
+        $result = $conn->query($sql);
     
-    if($result->num_rows > 0){
-    while($results = $result->fetch_assoc()){
-    //echo "<tr><td>".$results['DoctorID']."</td>";
-    echo "<td>".$results['FirstName']."</td>";
-    echo "<td>".$results['LastName']."</td>";
-    echo "<td>".$results['Specialization']."</td>";
-    echo "<td>".$results['Location']."</td></tr>";
+        if ($result->num_rows > 0) {
+            while ($results = $result->fetch_assoc()) {
+                echo "<td>".$results['FirstName']."</td>";
+                echo "<td>".$results['LastName']."</td>";
+                echo "<td>".$results['Specialization']."</td>";
+                echo "<td>".$results['Location']."</td></tr>";
+            }
+        }
     }
-    }
+
     
     
     // Closing connection
