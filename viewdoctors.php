@@ -20,13 +20,13 @@
           <div class="navbar-nav">
             <div class="row">
                 <div class="col">
-                    <a class="nav-item nav-link" href="/index.php">Home</a>
+                    <a class="nav-item nav-link active" href="/index.php">Home</a>
                 </div>
                 <div class="col">
-                    <a class="nav-item nav-link" href="/viewdoctors.php">View All Doctors</a>
+                    <a class="nav-item nav-link active" href="/viewdoctors.php">View All Doctors</a>
                 </div>
                 <div class="col">
-                    <a class="nav-item nav-link active" href="/adddoctors.php">Add Doctors</a>
+                    <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
                 </div>
                 <div class="col">
                     <a class="nav-item nav-link" href="/contact.php">Contact Us</a>
@@ -38,10 +38,13 @@
                 
                     <form class="form-inline" style="white-space:nowrap;">
                         <div class="col-md-auto">
-                            <input class="form-control mr-sm-2" type="search" size="30" placeholder="Search Doctors..." aria-label="Search">
+                            <input class="form-control mr-sm-2" type="search" size="15" name="FnameInput" placeholder="Search First Name" aria-label="Search">
                         </div>
                         <div class="col-md-auto">
-                            <input class="form-control mr-sm-2" type="search" size="6" placeholder="Location" aria-label="Search">
+                            <input class="form-control mr-sm-2" type="search" size="15" name="LnameInput" placeholder="Search Last Name" aria-label="Search">
+                        </div>
+                        <div class="col-md-auto">
+                            <input class="form-control mr-sm-2" type="search" size="8" placeholder="Location" aria-label="Search">
                         </div>
                         <div class="col">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -56,50 +59,68 @@
 </header>
 
 <body>
-	
-    <h1>Add Doctors</h1>
 
-    <?php
-    include_once 'db.php';
-    $successMessage = "";
 
-    if (isset($_POST['submit'])) {
-        if(!$conn)
-            echo mysql_error($conn);
+<?php?>
 
-        //validated your inputs fields
-        $first = $_POST['first'];
-        $last = $_POST['last'];
-        $specialization = $_POST['specialization'];
-        $location = $_POST['location'];
+<table>
+<tr>
+<td>First Name</td>
+<td>Last Name</td>
+<td>Specialization</td>
+<td>Location</td>
+</tr>
+<?php
 
-        //prepare and bind 
-        $sql = $conn->prepare("INSERT INTO doctor (FirstName,LastName,Specialization, Location) VALUES (?,?,?,?)");
-        $sql->bind_param("ssss", $first, $last, $specialization, $location);
+// Server name must be localhost
+$servername = "localhost";
 
-        if ($sql->execute()) {
-            echo("Doctor has been added");
-        }
+// In my case, user name will be root
+$username = "root";
 
-        $sql->close();
-        $conn->close();
+// Password is empty
+$password = "";
+
+$db="ratemydoctor";
+
+// Creating a connection
+$conn = new mysqli($servername, 
+            $username, $password);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failure: " 
+        . $conn->connect_error);
+} 
+
+
+$sql = "USE ratemydoctor";
+$try= $conn->query($sql);
+
+$sql = "SELECT * FROM doctor";
+$result = $conn->query($sql);
+
+
+
+if($result->num_rows > 0){
+while($results = $result->fetch_assoc()){
+//echo "<tr><td>".$results['DoctorID']."</td>";
+echo "<td>".$results['FirstName']."</td>";
+echo "<td>".$results['LastName']."</td>";
+echo "<td>".$results['Specialization']."</td>";
+echo "<td>".$results['Location']."</td></tr>";
+}
 }
 
+
+// Closing connection
+$conn->close();
 ?>
 
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <input type="text" class="form-control" name="first" placeholder="First Name">
-        <input type="text" class="form-control" name="last" placeholder="Last Name">
-        <input type="text" class="form-control" name="specialization" placeholder="Specialization">
-        <input type="text" class="form-control" name="location" placeholder="Location"> 
-        <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
-    </form>
 
-    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
 
 </body>

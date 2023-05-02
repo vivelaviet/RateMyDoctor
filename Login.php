@@ -23,6 +23,9 @@
                     <a class="nav-item nav-link" href="/index.php">Home</a>
                 </div>
                 <div class="col">
+                    <a class="nav-item nav-link" href="/viewdoctors.php">View All Doctors</a>
+                </div>
+                <div class="col">
                     <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
                 </div>
                 <div class="col">
