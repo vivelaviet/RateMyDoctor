@@ -29,6 +29,9 @@
                     <a class="nav-item nav-link active" href="/adddoctors.php">Add Doctors</a>
                 </div>
                 <div class="col">
+                    <a class="nav-item nav-link" href="/appointment.php">Appointment</a>
+                </div>
+                <div class="col">
                     <a class="nav-item nav-link" href="/contact.php">Contact Us</a>
                 </div>
                 <div class="col">
