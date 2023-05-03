@@ -75,7 +75,7 @@
 
     <h1>View All Customers</h1>
     <form action="" method="post">
-    <table>
+    <table class="table">
     <tr>
     <td>CustomerID</td>
     <td>First Name</td>

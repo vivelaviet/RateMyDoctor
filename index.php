@@ -74,40 +74,26 @@
     
 
 	
-	<table>
+
+	<table class="table">
     <tr>
+    <?php 
+    session_start();
+    if(!isset($_SESSION['role'])) {
+        $_SESSION['role'] = 'customer';
+    }
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'scheduler') {
+        echo "<td>DoctorID</td>";
+    }
+    ?>
     <td>First Name</td>
     <td>Last Name</td>
     <td>Specialization</td>
     <td>Location</td>
     </tr>
     <?php
-  
-    // Server name must be localhost
-    $servername = "localhost";
-    
-    // In my case, user name will be root
-    $username = "root";
-    
-    // Password is empty
-    $password = "";
-
-    $db="ratemydoctor";
-    
-    // Creating a connection
-    $conn = new mysqli($servername, 
-                $username, $password);
-    
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failure: " 
-            . $conn->connect_error);
-    } 
-	
-	
+    include_once 'db.php';
     if (isset($_GET['FnameInput']) || isset($_GET['LnameInput']) || isset($_GET['locationInput'])) {
-        $sql = "USE ratemydoctor";
-        $try= $conn->query($sql);
         
         // Initialize the WHERE clause
         $whereClause = "WHERE 1=1";
@@ -135,10 +121,17 @@
     
         if ($result->num_rows > 0) {
             while ($results = $result->fetch_assoc()) {
+                if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'scheduler') {
+                    echo "<td>".$results['DoctorID']."</td>";
+                }
                 echo "<td>".$results['FirstName']."</td>";
                 echo "<td>".$results['LastName']."</td>";
                 echo "<td>".$results['Specialization']."</td>";
-                echo "<td>".$results['Location']."</td></tr>";
+                echo "<td>".$results['Location']."</td>";
+                if ($_SESSION['role'] == 'admin') {
+                    echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteDoctor" value="'.$results['DoctorID'].'" />Delete</button></td>';
+                }
+                echo '</tr>';
             }
         }
     }

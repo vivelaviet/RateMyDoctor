@@ -76,8 +76,17 @@
 
 <form action="" method="post">
 
-<table>
+<table class="table">
 <tr>
+<?php 
+session_start();
+if(!isset($_SESSION['role'])) {
+    $_SESSION['role'] = 'customer';
+}
+if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'scheduler') {
+    echo "<td>DoctorID</td>";
+}
+?>
 <td>First Name</td>
 <td>Last Name</td>
 <td>Specialization</td>
@@ -88,7 +97,8 @@
 <?php
     include_once 'db.php';
     
-
+    
+    
     if(isset($_POST['deleteDoctor']) and is_numeric($_POST['deleteDoctor']))
     {
       $delete = $_POST['deleteDoctor'];
@@ -106,17 +116,19 @@ $result = $conn->query($sql);
 
 if($result->num_rows > 0){
     while($results = $result->fetch_assoc()){
-    //echo "<tr><td>".$results['DoctorID']."</td>";
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'scheduler') {
+        echo "<td>".$results['DoctorID']."</td>";
+    }
     echo "<td>".$results['FirstName']."</td>";
     echo "<td>".$results['LastName']."</td>";
     echo "<td>".$results['Specialization']."</td>";
     echo "<td>".$results['Location']."</td>";
-    echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteDoctor" value="'.$results['DoctorID'].'" />Delete</button></td></tr>';
+    if ($_SESSION['role'] == 'admin') {
+        echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteDoctor" value="'.$results['DoctorID'].'" />Delete</button></td>';
+    }
+    echo '</tr>';
     }
 }
-
-
-
 
 // Closing connection
 $conn->close();

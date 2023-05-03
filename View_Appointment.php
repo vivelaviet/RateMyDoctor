@@ -75,7 +75,7 @@
 
     <h1>View All Appointment</h1>
     <form action="" method="post">
-    <table>
+    <table class="table">
     <tr>
     <td>AppointmentID</td>
     <td>Date</td>
