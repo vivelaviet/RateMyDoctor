@@ -107,7 +107,7 @@ if($result->num_rows > 0){
     echo "<td>".$results['LastName']."</td>";
     echo "<td>".$results['Specialization']."</td>";
     echo "<td>".$results['Location']."</td>";
-    echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteDoctor" value="'.$results['DoctorID'].'" />Delete</button></td></tr>"';
+    echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteDoctor" value="'.$results['DoctorID'].'" />Delete</button></td></tr>';
     }
 }
 
