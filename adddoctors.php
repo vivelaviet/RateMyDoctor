@@ -77,10 +77,12 @@
 
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
+        <input type="text" class="form-control" name="doctorID" placeholder="DoctorID (only use for update)">
         <input type="text" class="form-control" name="first" placeholder="First Name">
         <input type="text" class="form-control" name="last" placeholder="Last Name">
         <input type="text" class="form-control" name="specialization" placeholder="Specialization">
         <input type="text" class="form-control" name="location" placeholder="Location"> 
+        <button type="update" class="btn btn-primary" name="update" value="Submit">Update</button>
         <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
     </form>
 
@@ -109,7 +111,29 @@
 
         $sql->close();
         $conn->close();
-}
+    } else if (isset($_POST['update'])) {
+        if(!$conn)
+            echo mysql_error($conn);
+
+        //validated your inputs fields
+        $doctorID = $_POST['doctorID'];
+        $first = $_POST['first'];
+        $last = $_POST['last'];
+        $specialization = $_POST['specialization'];
+        $location = $_POST['location'];
+        
+
+        //prepare and bind 
+        $sql = $conn->prepare("UPDATE doctor SET FirstName=?, LastName=?,Specialization=?, Location=? WHERE DoctorID=?");
+        $sql->bind_param("ssssi", $first, $last, $specialization, $location,$doctorID);
+
+        if ($sql->execute()) {
+            echo("Doctor has been updated");
+        }
+
+        $sql->close();
+        $conn->close();
+    }
 
 ?>
 
