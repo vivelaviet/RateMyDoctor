@@ -28,7 +28,7 @@
                     <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
                 </div>
                 <div class="col">
-                    <a class="nav-item nav-link" href="/addcustomers.php">Add Customers</a>
+                    <a class="nav-item nav-link" href="/addcustomers.php">Add/Update Customers</a>
                 </div>
                 <div class="col">
                     <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
@@ -63,19 +63,22 @@
       </nav>
 </header>
 <body>
-    <h1>Add Customer</h1>
+    <h1>Add/Update Customer</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
+        <input type="number" class="form-control" name="id" placeholder="id for update ONLY">
         <input type="text" class="form-control" name="first" placeholder="First Name">
         <input type="text" class="form-control" name="last" placeholder="Last Name">
         <input type="number" class="form-control" name="age" placeholder="Age">
         <input type="text" class="form-control" name="insurance" placeholder="Insurance"> 
         <input type="text" class="form-control" name="password" placeholder="Password"> 
         <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
+        <button type="update" class="btn btn-primary" name="update" value="Update">Update</button>
     </form>
     
     <?php
     include_once 'db.php';
     $successMessage = "";
+    
     if (isset($_POST['submit'])) {
         if(!$conn)
             echo mysql_error($conn);
@@ -86,10 +89,9 @@
         $age = $_POST['age'];
         $password = $_POST['password'];
         $insurance = $_POST['insurance'];
-
         //prepare and bind 
         $sql = $conn->prepare("INSERT INTO customer (FirstName,LastName,Password,Age, Insurance) VALUES (?,?,?,?,?)");
-        $sql->bind_param("sssis", $first, $last, $password, $age, $insuance);
+        $sql->bind_param("sssis", $first, $last, $password, $age, $insurance);
 
         if ($sql->execute()) {
             echo("Customer has been added");
@@ -97,7 +99,33 @@
 
         $sql->close();
         $conn->close();
-}
+    }
+    else if (isset($_POST['update'])) {
+        if(!$conn)
+            echo mysql_error($conn);
+
+        //validated your inputs fields
+        $first = $_POST['first'];
+        $last = $_POST['last'];
+        $age = $_POST['age'];
+        $password = $_POST['password'];
+        $insurance = $_POST['insurance'];
+        $id=$_POST['id'];
+
+
+        $sql = $conn->prepare("UPDATE customer SET FirstName=?, LastName=?, Password=?, Age=?, Insurance=? WHERE CustomerID=?");
+        $sql->bind_param("sssisi", $first, $last, $password, $age, $insurance, $id);
+
+        // Check if the query was successful
+        if ($sql->execute()) {
+            echo "Customer has been updated";
+        } else {
+            echo "Error updating customer: " . $conn->error;
+        }
+
+    $sql->close();
+    $conn->close();
+    }   
 
 ?>
 
