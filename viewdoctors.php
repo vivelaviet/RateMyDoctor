@@ -25,9 +25,18 @@
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/viewdoctors.php">View All Doctors</a>
                 </div>
-                <div class="col-auto">
-                    <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
-                </div>
+                <?php 
+                session_start();
+                if(!isset($_SESSION['role'])) {
+                    $_SESSION['role'] = 'customer';
+                }
+                if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'scheduler') {
+                    echo '
+                    <div class="col-auto">
+                    <a class="nav-item nav-link" href="/adddoctors.php">Add/Update Doctors</a>
+                    </div>';
+                }
+                ?>
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/addcustomers.php">Add/Update Customers</a>
                 </div>

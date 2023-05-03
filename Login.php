@@ -25,9 +25,18 @@
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/viewdoctors.php">View All Doctors</a>
                 </div>
-                <div class="col-auto">
-                    <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
-                </div>
+                <?php 
+                session_start();
+                if(!isset($_SESSION['role'])) {
+                    $_SESSION['role'] = 'customer';
+                }
+                if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'scheduler') {
+                    echo '
+                    <div class="col-auto">
+                    <a class="nav-item nav-link" href="/adddoctors.php">Add/Update Doctors</a>
+                    </div>';
+                }
+                ?>
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/addcustomers.php">Add/Update Customers</a>
                 </div>
@@ -73,26 +82,24 @@
 
     <?php 
     include_once 'db.php';
-    session_start();
-
-    if(!isset($_SESSION['role'])) {
-        $_SESSION['role'] = 'customer';
-    }
 
 
     if (isset($_POST['admin'])) {
         $_SESSION['role'] = 'admin';
+        echo "<meta http-equiv='refresh' content='0'>";
     } else if (isset($_POST['scheduler'])) {
         $_SESSION['role'] = 'scheduler';
+        echo "<meta http-equiv='refresh' content='0'>";
     } else if (isset($_POST['customer'])) {
         $_SESSION['role'] = 'customer';
+        echo "<meta http-equiv='refresh' content='0'>";
     }
 
     echo "You are a ".$_SESSION['role'];
 
     ?>
 
-    <form action=""  method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
 
         <center>
         <button type="admin" class="btn btn-danger" name="admin" value="admin">Admin</button>
