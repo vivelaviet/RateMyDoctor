@@ -28,7 +28,7 @@
                     <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
                 </div>
                 <div class="col-auto">
-                    <a class="nav-item nav-link" href="/addcustomers.php">Add Customers</a>
+                    <a class="nav-item nav-link" href="/addcustomers.php">Add/Delete Customers</a>
                 </div>
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
@@ -74,14 +74,14 @@
         <input type="number" class="form-control" name="age" placeholder="Age">
         <input type="text" class="form-control" name="insurance" placeholder="Insurance"> 
         <input type="text" class="form-control" name="password" placeholder="Password"> 
-        <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
+        <button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
         <button type="update" class="btn btn-primary" name="update" value="Update">Update</button>
     </form>
     
     <?php
     include_once 'db.php';
     $successMessage = "";
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['add'])) {
         if(!$conn)
             echo mysql_error($conn);
 
@@ -128,7 +128,6 @@
     $sql->close();
     $conn->close();
     }   
-
 ?>
 
 

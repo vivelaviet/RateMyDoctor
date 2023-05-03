@@ -29,7 +29,7 @@
                     <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
                 </div>
                 <div class="col-auto">
-                    <a class="nav-item nav-link" href="/addcustomers.php">Add Customers</a>
+                    <a class="nav-item nav-link" href="/addcustomers.php">Add/Delete Customers</a>
                 </div>
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
@@ -73,6 +73,7 @@
     <h1>View All Customers</h1>
     <table>
     <tr>
+    <td>CustomerID</td>
     <td>First Name</td>
     <td>Last Name</td>
     <td>Age</td>
@@ -80,6 +81,13 @@
     </tr>
     <?php
     include_once 'db.php';
+
+    if(isset($_POST['deleteCustomer']) and is_numeric($_POST['deleteCustomer']))
+    {
+      $delete = $_POST['deleteCustomer'];
+      $sql = "DELETE FROM `customer` where `CustomerID` = '$delete'"; 
+      $result = $conn->query($sql);
+    }
     
     $sql = "SELECT * FROM customer";
     $result = $conn->query($sql);
@@ -89,10 +97,12 @@
     
     if($result->num_rows > 0){
     while($results = $result->fetch_assoc()){
+    echo "<td>".$results['CustomerID']."</td>";
     echo "<td>".$results['FirstName']."</td>";
     echo "<td>".$results['LastName']."</td>";
     echo "<td>".$results['Age']."</td>";
-    echo "<td>".$results['Insurance']."</td></tr>";
+    echo "<td>".$results['Insurance']."</td>";
+    echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteCustomer" value="'.$results['CustomerID'].'" />Delete</button></td></tr>"';
     }
     }
     

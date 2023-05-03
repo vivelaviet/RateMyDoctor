@@ -28,7 +28,7 @@
                     <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
                 </div>
                 <div class="col-auto">
-                    <a class="nav-item nav-link" href="/addcustomers.php">Add Customers</a>
+                    <a class="nav-item nav-link" href="/addcustomers.php">Add/Update Customers</a>
                 </div>
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
@@ -68,21 +68,47 @@
 <body>
     <h1>Appointment</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <p>
-            <label for="number">Patient ID: </label>   
-            <input type="text" class="form-control"  id="patient_id" name="Patient_id">
-            <label for="time">Time:</label>
-            <input type="time" class="form-control" id="time" name="Time">
-            <label for="date">Date:</label>
-            <input type="date" class="form-control"  id="date" name="Date">
-            <label for="place">Place:</label>
-            <input type="text" class="form-control"  id="place" name="Place">
-            <label for="doctor_id">Doctor ID:</label>
-            <input type="number" class="form-control"  id="doctor_id" name="Doctor_id">
-            <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>   
-        </p>
+        <label >CustomerID:</label>
+        <input type="number" class="form-control" name="customerID" placeholder="CustomerID" > 
+        <label >Time:</label>
+        <input type="time" class="form-control" name="time" placeholder="Time" >
+        <label >Date:</label>
+        <input type="date" class="form-control" name="date" placeholder="Date" >
+        <label >Place:</label>
+        <input type="text" class="form-control" name="place" placeholder="Place">
+        <label >DoctorID:</label>
+        <input type="number" class="form-control" name="doctorID" placeholder="DoctorID" /><br>
+        <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
 	</form>
 
+
+    <?php
+    include_once 'db.php';
+    $successMessage = "";
+    if (isset($_POST['submit'])) {
+        
+        if(!$conn)
+            echo mysql_error($conn);
+            
+        // //validated your inputs fields
+        $date = $_POST['date'];
+        $time = $_POST['time'];
+        $place = $_POST['place'];
+        $doctorID = $_POST['doctorID'];
+        $customerID = $_POST['customerID'];
+        // //prepare and bind 
+        $sql = $conn->prepare("INSERT INTO appointment (Date,Time,Place,DoctorID,CustomerID) VALUES (?,?,?,?,?)");
+        $sql->bind_param("sssii", $date, $time, $place, $doctorID, $customerID);
+        
+        if ($sql->execute()) {
+
+            echo("Appointment has been added");
+        }
+
+        $sql->close();
+        $conn->close();
+    }
+    ?>
 
    
     
