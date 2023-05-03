@@ -19,31 +19,31 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <div class="row">
-                <div class="col">
-                    <a class="nav-item nav-link active" href="/index.php">Home</a>
+                <div class="col-auto">
+                    <a class="nav-item nav-link" href="/index.php">Home</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/viewdoctors.php">View All Doctors</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/addcustomers.php">Add Customers</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/appointment.php">Appointment</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/contact.php">Contact Us</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/login.php">Login</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                 
                     <form class="form-inline" style="white-space:nowrap;">
                         <div class="col-md-auto">
@@ -55,7 +55,7 @@
                         <div class="col-md-auto">
                             <input class="form-control mr-sm-2" type="search" size="8" placeholder="Location" aria-label="Search">
                         </div>
-                        <div class="col">
+                        <div class="col-auto">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </div>
                     </form>
@@ -68,6 +68,8 @@
 </header>
 
 <body>
+    
+
 	
 	<table>
     <tr>

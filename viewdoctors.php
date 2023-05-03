@@ -19,31 +19,31 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <div class="row">
-                <div class="col">
-                    <a class="nav-item nav-link active" href="/index.php">Home</a>
+                <div class="col-auto">
+                    <a class="nav-item nav-link" href="/index.php">Home</a>
                 </div>
-                <div class="col">
-                    <a class="nav-item nav-link active" href="/viewdoctors.php">View All Doctors</a>
+                <div class="col-auto">
+                    <a class="nav-item nav-link" href="/viewdoctors.php">View All Doctors</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/addcustomers.php">Add Customers</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/appointment.php">Appointment</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/contact.php">Contact Us</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/login.php">Login</a>
                 </div>
-                <div class="col">
+                <div class="col-auto">
                 
                     <form class="form-inline" style="white-space:nowrap;">
                         <div class="col-md-auto">
@@ -55,7 +55,7 @@
                         <div class="col-md-auto">
                             <input class="form-control mr-sm-2" type="search" size="8" placeholder="Location" aria-label="Search">
                         </div>
-                        <div class="col">
+                        <div class="col-auto">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </div>
                     </form>
@@ -70,7 +70,8 @@
 <body>
 
 
-<?php?>
+
+<form action="" method="post">
 
 <table>
 <tr>
@@ -79,32 +80,20 @@
 <td>Specialization</td>
 <td>Location</td>
 </tr>
+
+
 <?php
+    include_once 'db.php';
 
-// Server name must be localhost
-$servername = "localhost";
-
-// In my case, user name will be root
-$username = "root";
-
-// Password is empty
-$password = "";
-
-$db="ratemydoctor";
-
-// Creating a connection
-$conn = new mysqli($servername, 
-            $username, $password);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failure: " 
-        . $conn->connect_error);
-} 
+    if(isset($_POST['deleteDoctor']) and is_numeric($_POST['deleteDoctor']))
+    {
+      $delete = $_POST['deleteDoctor'];
+      $sql = "DELETE FROM `doctor` where `DoctorID` = '$delete'"; 
+      $result = $conn->query($sql);
+    }
+    
 
 
-$sql = "USE ratemydoctor";
-$try= $conn->query($sql);
 
 $sql = "SELECT * FROM doctor";
 $result = $conn->query($sql);
@@ -112,20 +101,25 @@ $result = $conn->query($sql);
 
 
 if($result->num_rows > 0){
-while($results = $result->fetch_assoc()){
-//echo "<tr><td>".$results['DoctorID']."</td>";
-echo "<td>".$results['FirstName']."</td>";
-echo "<td>".$results['LastName']."</td>";
-echo "<td>".$results['Specialization']."</td>";
-echo "<td>".$results['Location']."</td></tr>";
+    while($results = $result->fetch_assoc()){
+    //echo "<tr><td>".$results['DoctorID']."</td>";
+    echo "<td>".$results['FirstName']."</td>";
+    echo "<td>".$results['LastName']."</td>";
+    echo "<td>".$results['Specialization']."</td>";
+    echo "<td>".$results['Location']."</td>";
+    echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteDoctor" value="'.$results['DoctorID'].'" />Delete</button></td></tr>"';
+    }
 }
-}
+
+
 
 
 // Closing connection
 $conn->close();
 ?>
 
+</table>
+</form>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 

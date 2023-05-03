@@ -81,7 +81,6 @@
     <?php
     include_once 'db.php';
     $successMessage = "";
-    
     if (isset($_POST['submit'])) {
         if(!$conn)
             echo mysql_error($conn);
