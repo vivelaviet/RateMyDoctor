@@ -88,7 +88,6 @@
 <table class="table">
 <tr>
 <?php 
-session_start();
 if(!isset($_SESSION['role'])) {
     $_SESSION['role'] = 'customer';
 }

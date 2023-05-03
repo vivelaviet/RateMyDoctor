@@ -37,7 +37,7 @@
                 }
                 ?>
                 <div class="col-auto">
-                    <a class="nav-item nav-link" href="/addcustomers.php">Add/Delete Customers</a>
+                    <a class="nav-item nav-link" href="/addcustomers.php">Add/Update Customers</a>
                 </div>
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
