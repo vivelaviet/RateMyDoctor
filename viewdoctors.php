@@ -35,7 +35,10 @@
                     <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
                 </div>
                 <div class="col-auto">
-                    <a class="nav-item nav-link" href="/appointment.php">Appointment</a>
+                    <a class="nav-item nav-link" href="/appointment.php">Add/Update Appointment</a>
+                </div>
+                <div class="col-auto">
+                    <a class="nav-item nav-link" href="/View_appointment.php">View All Appointment</a>
                 </div>
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/contact.php">Contact Us</a>
@@ -84,6 +87,7 @@
 
 <?php
     include_once 'db.php';
+    
 
     if(isset($_POST['deleteDoctor']) and is_numeric($_POST['deleteDoctor']))
     {

@@ -35,7 +35,10 @@
                     <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
                 </div>
                 <div class="col-auto">
-                    <a class="nav-item nav-link" href="/appointment.php">Appointment</a>
+                    <a class="nav-item nav-link" href="/appointment.php">Add/Update Appointment</a>
+                </div>
+                <div class="col-auto">
+                    <a class="nav-item nav-link" href="/View_Appointment.php">View All Appointment</a>
                 </div>
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/contact.php">Contact Us</a>
@@ -71,6 +74,7 @@
 <body>
 
     <h1>View All Customers</h1>
+    <form action="" method="post">
     <table>
     <tr>
     <td>CustomerID</td>
@@ -111,7 +115,8 @@
     $conn->close();
     ?>
     
-    
+    </table>
+    </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     
     
