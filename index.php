@@ -53,7 +53,7 @@
                             <input class="form-control mr-sm-2" type="search" size="15" name="LnameInput" placeholder="Search Last Name" aria-label="Search">
                         </div>
                         <div class="col-md-auto">
-                            <input class="form-control mr-sm-2" type="search" size="8" placeholder="Location" aria-label="Search">
+                            <input class="form-control mr-sm-2" type="search" size="8" name="locationInput" placeholder="Location" aria-label="Search">
                         </div>
                         <div class="col-auto">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -102,20 +102,29 @@
     } 
 	
 	
-    if (isset($_GET['FnameInput']) || isset($_GET['LnameInput'])) {
+    if (isset($_GET['FnameInput']) || isset($_GET['LnameInput']) || isset($_GET['locationInput'])) {
         $sql = "USE ratemydoctor";
         $try= $conn->query($sql);
+        
+        // Initialize the WHERE clause
+        $whereClause = "WHERE 1=1";
         
         // Check if first name is provided
         if (isset($_GET['FnameInput'])) {
             $fname = $_GET['FnameInput'];
-            $whereClause = "WHERE FirstName LIKE '%" . $fname . "%'";
+            $whereClause .= " AND FirstName LIKE '%" . $fname . "%'";
         }
         
         // Check if last name is provided
         if (isset($_GET['LnameInput'])) {
             $lname = $_GET['LnameInput'];
-            $whereClause = (isset($whereClause) ? $whereClause . " AND " : "WHERE ") . "LastName LIKE '%" . $lname . "%'";
+            $whereClause .= " AND LastName LIKE '%" . $lname . "%'";
+        }
+        
+        // Check if location is provided
+        if (isset($_GET['locationInput'])) {
+            $location = $_GET['locationInput'];
+            $whereClause .= " AND Location LIKE '%" . $location . "%'";
         }
         
         $sql = "SELECT * FROM doctor " . $whereClause;
