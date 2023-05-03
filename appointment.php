@@ -28,13 +28,16 @@
                     <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
                 </div>
                 <div class="col-auto">
-                    <a class="nav-item nav-link" href="/addcustomers.php">Add Customers</a>
+                    <a class="nav-item nav-link" href="/addcustomers.php">Add/Update Customers</a>
                 </div>
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
                 </div>
                 <div class="col-auto">
-                    <a class="nav-item nav-link" href="/appointment.php">Appointment</a>
+                    <a class="nav-item nav-link" href="/appointment.php">Add/Update Appointment</a>
+                </div>
+                <div class="col-auto">
+                    <a class="nav-item nav-link" href="/View_appointment.php">View All Appointment</a>
                 </div>
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/contact.php">Contact Us</a>
@@ -66,23 +69,75 @@
       </nav>
 </header>
 <body>
-    <h1>Appointment</h1>
+    <h1>Add Appointment</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <p>
-            <label for="number">Patient ID: </label>   
-            <input type="text" class="form-control"  id="patient_id" name="Patient_id">
-            <label for="time">Time:</label>
-            <input type="time" class="form-control" id="time" name="Time">
-            <label for="date">Date:</label>
-            <input type="date" class="form-control"  id="date" name="Date">
-            <label for="place">Place:</label>
-            <input type="text" class="form-control"  id="place" name="Place">
-            <label for="doctor_id">Doctor ID:</label>
-            <input type="number" class="form-control"  id="doctor_id" name="Doctor_id">
-            <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>   
-        </p>
+        <input type="number" class="form-control" name="id" placeholder="id for update ONLY">
+        <label >CustomerID:</label>
+        <input type="number" class="form-control" name="customerID" placeholder="CustomerID" > 
+        <label >Time:</label>
+        <input type="time" class="form-control" name="time" placeholder="Time" >
+        <label >Date:</label>
+        <input type="date" class="form-control" name="date" placeholder="Date" >
+        <label >Place:</label>
+        <input type="text" class="form-control" name="place" placeholder="Place">
+        <label >DoctorID:</label>
+        <input type="number" class="form-control" name="doctorID" placeholder="DoctorID" /><br>
+        <button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
+        <button type="update" class="btn btn-primary" name="update" value="Update">Update</button> 
 	</form>
 
+    
+    <?php
+    include_once 'db.php';
+    $successMessage = "";
+    if (isset($_POST['add'])) {
+        
+        if(!$conn)
+            echo mysql_error($conn);
+            
+        // //validated your inputs fields
+        $date = $_POST['date'];
+        $time = $_POST['time'];
+        $place = $_POST['place'];
+        $doctorID = $_POST['doctorID'];
+        $customerID = $_POST['customerID'];
+        // //prepare and bind 
+        $sql = $conn->prepare("INSERT INTO appointment (Date,Time,Place,DoctorID,CustomerID) VALUES (?,?,?,?,?)");
+        $sql->bind_param("sssii", $date, $time, $place, $doctorID, $customerID);
+        
+        if ($sql->execute()) {
+
+            echo("Appointment has been added");
+        }
+
+        $sql->close();
+        $conn->close();
+    }
+    else if (isset($_POST['update'])) {
+        if(!$conn)
+            echo mysql_error($conn);
+
+        //validated your inputs fields
+        $date = $_POST['date'];
+        $time = $_POST['time'];
+        $place = $_POST['place'];
+        $doctorID = $_POST['doctorID'];
+        $customerID = $_POST['customerID'];
+        $id=$_POST['id'];
+
+
+        $sql = $conn->prepare("UPDATE appointment SET Date=?,Time=?,Place=?,DoctorID=?,CustomerID=? WHERE AppointmentID=?");
+        $sql->bind_param("sssiii", $date, $time, $place, $doctorID, $customerID,$id);
+
+        // Check if the query was successful
+        if ($sql->execute()) {
+            echo "Appointment has been updated";
+        }
+
+    $sql->close();
+    $conn->close();
+    }   
+    ?>
 
    
     
