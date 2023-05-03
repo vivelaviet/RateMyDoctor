@@ -29,6 +29,12 @@
                     <a class="nav-item nav-link active" href="/adddoctors.php">Add Doctors</a>
                 </div>
                 <div class="col">
+                    <a class="nav-item nav-link" href="/addcustomers.php">Add Customers</a>
+                </div>
+                <div class="col">
+                    <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
+                </div>
+                <div class="col">
                     <a class="nav-item nav-link" href="/appointment.php">Appointment</a>
                 </div>
                 <div class="col">
@@ -62,10 +68,21 @@
 	
     <h1>Add Doctors</h1>
 
+
+
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
+        <input type="text" class="form-control" name="first" placeholder="First Name">
+        <input type="text" class="form-control" name="last" placeholder="Last Name">
+        <input type="text" class="form-control" name="specialization" placeholder="Specialization">
+        <input type="text" class="form-control" name="location" placeholder="Location"> 
+        <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
+    </form>
+
     <?php
+    
     include_once 'db.php';
     $successMessage = "";
-
+    
     if (isset($_POST['submit'])) {
         if(!$conn)
             echo mysql_error($conn);
@@ -89,16 +106,6 @@
 }
 
 ?>
-
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <input type="text" class="form-control" name="first" placeholder="First Name">
-        <input type="text" class="form-control" name="last" placeholder="Last Name">
-        <input type="text" class="form-control" name="specialization" placeholder="Specialization">
-        <input type="text" class="form-control" name="location" placeholder="Location"> 
-        <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
-    </form>
-
-    
 
 
 

@@ -63,24 +63,49 @@
       </nav>
 </header>
 <body>
-    <h1>Appointment</h1>
+    <h1>Add Customer</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <p>
-            <label for="number">Patient ID: </label>   
-            <input type="text" class="form-control"  id="patient_id" name="Patient_id">
-            <label for="time">Time:</label>
-            <input type="time" class="form-control" id="time" name="Time">
-            <label for="date">Date:</label>
-            <input type="date" class="form-control"  id="date" name="Date">
-            <label for="place">Place:</label>
-            <input type="text" class="form-control"  id="place" name="Place">
-            <label for="doctor_id">Doctor ID:</label>
-            <input type="number" class="form-control"  id="doctor_id" name="Doctor_id">
-            <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>   
-        </p>
-	</form>
-
-
-   
+        <input type="text" class="form-control" name="first" placeholder="First Name">
+        <input type="text" class="form-control" name="last" placeholder="Last Name">
+        <input type="number" class="form-control" name="age" placeholder="Age">
+        <input type="text" class="form-control" name="insurance" placeholder="Insurance"> 
+        <input type="text" class="form-control" name="password" placeholder="Password"> 
+        <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
+    </form>
     
+    <?php
+    include_once 'db.php';
+    $successMessage = "";
+    if (isset($_POST['submit'])) {
+        if(!$conn)
+            echo mysql_error($conn);
+
+        //validated your inputs fields
+        $first = $_POST['first'];
+        $last = $_POST['last'];
+        $age = $_POST['age'];
+        $password = $_POST['password'];
+        $insurance = $_POST['insurance'];
+
+        //prepare and bind 
+        $sql = $conn->prepare("INSERT INTO customer (FirstName,LastName,Password,Age, Insurance) VALUES (?,?,?,?,?)");
+        $sql->bind_param("sssis", $first, $last, $password, $age, $insuance);
+
+        if ($sql->execute()) {
+            echo("Customer has been added");
+        }
+
+        $sql->close();
+        $conn->close();
+}
+
+?>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+
 </body>
+
+

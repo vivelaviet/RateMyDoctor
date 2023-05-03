@@ -28,6 +28,12 @@
                     <a class="nav-item nav-link" href="/adddoctors.php">Add Doctors</a>
                 </div>
                 <div class="col">
+                    <a class="nav-item nav-link" href="/addcustomers.php">Add Customers</a>
+                </div>
+                <div class="col">
+                    <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
+                </div>
+                <div class="col">
                     <a class="nav-item nav-link" href="/appointment.php">Appointment</a>
                 </div>
                 <div class="col">
