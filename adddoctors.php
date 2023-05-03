@@ -86,7 +86,17 @@
 
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <input type="text" class="form-control" name="doctorID" placeholder="DoctorID (only use for update)">
+        <?php
+        include_once 'db.php';
+        $sql = "SELECT * FROM doctor";
+        $result = $conn->query($sql);
+
+        echo "<select name='doctorID'>";
+        while ($results = $result->fetch_assoc()) {
+            echo "<option value='" . $results['DoctorID'] . "'>" . $results['FirstName'] . " ". $results['LastName'] . "</option>";
+        }
+        echo "</select>";
+        ?>
         <input type="text" class="form-control" name="first" placeholder="First Name">
         <input type="text" class="form-control" name="last" placeholder="Last Name">
         <input type="text" class="form-control" name="specialization" placeholder="Specialization">
@@ -97,7 +107,6 @@
 
     <?php
     
-    include_once 'db.php';
     $successMessage = "";
     
     if (isset($_POST['submit'])) {
