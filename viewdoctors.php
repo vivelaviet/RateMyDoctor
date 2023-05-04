@@ -91,7 +91,7 @@
 if(!isset($_SESSION['role'])) {
     $_SESSION['role'] = 'customer';
 }
-if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'scheduler') {
+if ($_SESSION['role'] == 'admin') {
     echo "<td>DoctorID</td>";
 }
 ?>
