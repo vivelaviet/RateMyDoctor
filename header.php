@@ -10,12 +10,37 @@
                     <a class="nav-item nav-link" href="/index.php">Home</a>
                 </div>
                 <div class="col-auto">
-                    <a class="nav-item nav-link" href="/viewdoctors.php">View All Doctors</a>
+                    <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
                 </div>
                 <?php 
                 session_start();
                 if(!isset($_SESSION['role'])) {
                     $_SESSION['role'] = 'customer';
+                }
+                if($_SESSION['role'] == 'customer'|| $_SESSION['role'] == 'admin')
+                {
+                    echo '
+                    <div class="col-auto">
+                        <a class="nav-item nav-link" href="/addcustomers.php">Add/Update Customers</a>
+                    </div>
+                    <div class="col-auto">
+                        <a class="nav-item nav-link" href="/addratings.php">Add/Update Ratings</a>
+                    </div>
+                    <div class="col-auto">
+                        <a class="nav-item nav-link" href="/viewratings.php">View All Ratings</a>
+                    </div>
+                    ';
+                }
+                if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'scheduler')
+                {
+                    echo '
+                    <div class="col-auto">
+                        <a class="nav-item nav-link" href="/appointment.php">Add/Update Appointment</a>
+                    </div>
+                    <div class="col-auto">
+                        <a class="nav-item nav-link" href="/View_appointment.php">View All Appointment</a>
+                    </div>
+                    ';
                 }
                 if ($_SESSION['role'] == 'admin') {
                     echo '
@@ -24,24 +49,8 @@
                     </div>';
                 }
                 ?>
-
                 <div class="col-auto">
-                    <a class="nav-item nav-link" href="/addcustomers.php">Add/Update Customers</a>
-                </div>
-                <div class="col-auto">
-                    <a class="nav-item nav-link" href="/viewcustomer.php">View All Customers</a>
-                </div>
-                <div class="col-auto">
-                    <a class="nav-item nav-link" href="/appointment.php">Add/Update Appointment</a>
-                </div>
-                <div class="col-auto">
-                    <a class="nav-item nav-link" href="/View_appointment.php">View All Appointment</a>
-                </div>
-                <div class="col-auto">
-                    <a class="nav-item nav-link" href="/addratings.php">Add/Update Ratings</a>
-                </div>
-                <div class="col-auto">
-                    <a class="nav-item nav-link" href="/viewratings.php">View All Ratings</a>
+                    <a class="nav-item nav-link" href="/viewdoctors.php">View All Doctors</a>
                 </div>
                 <div class="col-auto">
                     <a class="nav-item nav-link" href="/contact.php">Contact Us</a>

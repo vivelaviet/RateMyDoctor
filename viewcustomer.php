@@ -52,7 +52,9 @@
     echo "<td>".$results['LastName']."</td>";
     echo "<td>".$results['Age']."</td>";
     echo "<td>".$results['Insurance']."</td>";
-    echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteCustomer" value="'.$results['CustomerID'].'" />Delete</button></td></tr>"';
+    if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'customer') {
+        echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteCustomer" value="'.$results['CustomerID'].'" />Delete</button></td></tr>"';
+    }
     }
     }
     

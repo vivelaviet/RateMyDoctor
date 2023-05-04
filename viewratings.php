@@ -51,7 +51,9 @@
     echo "<td>".$results['Comment']."</td>";
     echo "<td>".$results['Date']."</td>";
     echo "<td>".$results['DoctorID']."</td>";
-    echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteRating" value="'.$results['RatingID'].'" />Delete</button></td></tr>"';
+    if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'customer') {
+        echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteRating" value="'.$results['RatingID'].'" />Delete</button></td></tr>"';
+    }
     }
     }
     

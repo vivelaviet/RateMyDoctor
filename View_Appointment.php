@@ -53,7 +53,9 @@
     echo "<td>".$results['Place']."</td>";
     echo "<td>".$results['DoctorID']."</td>";
     echo "<td>".$results['CustomerID']."</td>";
-    echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteAppointment" value="'.$results['AppointmentID'].'" />Delete</button></td></tr>"';
+    if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'scheduler') {
+        echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteAppointment" value="'.$results['AppointmentID'].'" />Delete</button></td></tr>"';
+    }
     }
     }
     
