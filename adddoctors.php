@@ -27,7 +27,6 @@
         include_once 'db.php';
         $sql = "SELECT * FROM doctor";
         $result = $conn->query($sql);
-
         echo "<select name='doctorID'>";
         while ($results = $result->fetch_assoc()) {
             echo "<option value='" . $results['DoctorID'] . "'>" . $results['FirstName'] . " ". $results['LastName'] . "</option>";

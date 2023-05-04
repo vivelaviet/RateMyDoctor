@@ -17,7 +17,16 @@
 <body>
     <h1>Add/Update Customer</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <input type="number" class="form-control" name="id" placeholder="id for update ONLY">
+    <?php
+        include_once 'db.php';
+        $sql = "SELECT * FROM doctor";
+        $result = $conn->query($sql);
+        echo "<select name='doctorID'>";
+        while ($results = $result->fetch_assoc()) {
+            echo "<option value='" . $results['DoctorID'] . "'>" . $results['FirstName'] . " ". $results['LastName'] . "</option>";
+        }
+        echo "</select>";
+        ?>
         <input type="text" class="form-control" name="first" placeholder="First Name">
         <input type="text" class="form-control" name="last" placeholder="Last Name">
         <input type="number" class="form-control" name="age" placeholder="Age">
