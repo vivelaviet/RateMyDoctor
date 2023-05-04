@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Home</title>
+
 </head>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -83,77 +84,56 @@
         </div>
       </nav>
 </header>
-<body>
-    <h1>Add Appointment</h1>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <input type="number" class="form-control" name="id" placeholder="id for update ONLY">
-        <label >CustomerID:</label>
-        <input type="number" class="form-control" name="customerID" placeholder="CustomerID" > 
-        <label >Time:</label>
-        <input type="time" class="form-control" name="time" placeholder="Time" >
-        <label >Date:</label>
-        <input type="date" class="form-control" name="date" placeholder="Date" >
-        <label >Place:</label>
-        <input type="text" class="form-control" name="place" placeholder="Place">
-        <label >DoctorID:</label>
-        <input type="number" class="form-control" name="doctorID" placeholder="DoctorID" /><br>
-        <button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
-        <button type="update" class="btn btn-primary" name="update" value="Update">Update</button> 
-	</form>
 
-    
+
+<body>
+
+    <h1>View All Ratings</h1>
+    <form action="" method="post">
+    <table class="table">
+    <tr>
+    <td>RatingID</td>
+    <td>Score</td>
+    <td>Comment</td>
+    <td>Date</td>
+    <td>DoctorID</td>
+    </tr>
     <?php
     include_once 'db.php';
-    $successMessage = "";
-    if (isset($_POST['add'])) {
-        
-        if(!$conn)
-            echo mysql_error($conn);
-            
-        // //validated your inputs fields
-        $date = $_POST['date'];
-        $time = $_POST['time'];
-        $place = $_POST['place'];
-        $doctorID = $_POST['doctorID'];
-        $customerID = $_POST['customerID'];
-        // //prepare and bind 
-        $sql = $conn->prepare("INSERT INTO appointment (Date,Time,Place,DoctorID,CustomerID) VALUES (?,?,?,?,?)");
-        $sql->bind_param("sssii", $date, $time, $place, $doctorID, $customerID);
-        
-        if ($sql->execute()) {
 
-            echo("Appointment has been added");
-        }
-
-        $sql->close();
-        $conn->close();
+    if(isset($_POST['deleteRating']) and is_numeric($_POST['deleteRating']))
+    {
+      $delete = $_POST['deleteRating'];
+      $sql = "DELETE FROM `ratings` where `RatingID` = '$delete'"; 
+      $result = $conn->query($sql);
     }
-    else if (isset($_POST['update'])) {
-        if(!$conn)
-            echo mysql_error($conn);
-
-        //validated your inputs fields
-        $date = $_POST['date'];
-        $time = $_POST['time'];
-        $place = $_POST['place'];
-        $doctorID = $_POST['doctorID'];
-        $customerID = $_POST['customerID'];
-        $id=$_POST['id'];
-
-
-        $sql = $conn->prepare("UPDATE appointment SET Date=?,Time=?,Place=?,DoctorID=?,CustomerID=? WHERE AppointmentID=?");
-        $sql->bind_param("sssiii", $date, $time, $place, $doctorID, $customerID,$id);
-
-        // Check if the query was successful
-        if ($sql->execute()) {
-            echo "Appointment has been updated";
-        }
-
-    $sql->close();
-    $conn->close();
-    }   
-    ?>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     
-</body>
+    $sql = "SELECT * FROM ratings";
+    $result = $conn->query($sql);
+    
+    
+    
+    if($result->num_rows > 0){
+    while($results = $result->fetch_assoc()){
+    echo "<td>".$results['RatingID']."</td>";
+    echo "<td>".$results['Score']."</td>";
+    echo "<td>".$results['Comment']."</td>";
+    echo "<td>".$results['Date']."</td>";
+    echo "<td>".$results['DoctorID']."</td>";
+    echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteRating" value="'.$results['RatingID'].'" />Delete</button></td></tr>"';
+    }
+    }
+    
+    
+    // Closing connection
+    $conn->close();
+    ?>
+    
+    </table>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    
+    
+    
+    
+    </body>

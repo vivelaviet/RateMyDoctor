@@ -50,6 +50,12 @@
                     <a class="nav-item nav-link" href="/View_Appointment.php">View All Appointment</a>
                 </div>
                 <div class="col-auto">
+                    <a class="nav-item nav-link" href="/addratings.php">Add/Update Ratings</a>
+                </div>
+                <div class="col-auto">
+                    <a class="nav-item nav-link" href="/viewratings.php">View All Ratings</a>
+                </div>
+                <div class="col-auto">
                     <a class="nav-item nav-link" href="/contact.php">Contact Us</a>
                 </div>
                 <div class="col-auto">

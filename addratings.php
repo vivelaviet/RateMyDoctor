@@ -84,17 +84,15 @@
       </nav>
 </header>
 <body>
-    <h1>Add Appointment</h1>
+    <h1>Add Ratings</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
         <input type="number" class="form-control" name="id" placeholder="id for update ONLY">
-        <label >CustomerID:</label>
-        <input type="number" class="form-control" name="customerID" placeholder="CustomerID" > 
-        <label >Time:</label>
-        <input type="time" class="form-control" name="time" placeholder="Time" >
+        <label >Score:</label>
+        <input type="number" class="form-control" name="score" placeholder="Score" > 
+        <label >Comment:</label>
+        <input type="text" class="form-control" name="comment" placeholder="Comment" >
         <label >Date:</label>
         <input type="date" class="form-control" name="date" placeholder="Date" >
-        <label >Place:</label>
-        <input type="text" class="form-control" name="place" placeholder="Place">
         <label >DoctorID:</label>
         <input type="number" class="form-control" name="doctorID" placeholder="DoctorID" /><br>
         <button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
@@ -111,18 +109,17 @@
             echo mysql_error($conn);
             
         // //validated your inputs fields
+        $score = $_POST['score'];
+        $comment = $_POST['comment'];
         $date = $_POST['date'];
-        $time = $_POST['time'];
-        $place = $_POST['place'];
         $doctorID = $_POST['doctorID'];
-        $customerID = $_POST['customerID'];
         // //prepare and bind 
-        $sql = $conn->prepare("INSERT INTO appointment (Date,Time,Place,DoctorID,CustomerID) VALUES (?,?,?,?,?)");
-        $sql->bind_param("sssii", $date, $time, $place, $doctorID, $customerID);
+        $sql = $conn->prepare("INSERT INTO ratings (Score,Comment,Date,DoctorID) VALUES (?,?,?,?)");
+        $sql->bind_param("sssi", $score, $comment, $date, $doctorID);
         
         if ($sql->execute()) {
 
-            echo("Appointment has been added");
+            echo("Rating has been added");
         }
 
         $sql->close();
@@ -133,20 +130,19 @@
             echo mysql_error($conn);
 
         //validated your inputs fields
+        $score = $_POST['score'];
+        $comment = $_POST['comment'];
         $date = $_POST['date'];
-        $time = $_POST['time'];
-        $place = $_POST['place'];
         $doctorID = $_POST['doctorID'];
-        $customerID = $_POST['customerID'];
         $id=$_POST['id'];
 
 
-        $sql = $conn->prepare("UPDATE appointment SET Date=?,Time=?,Place=?,DoctorID=?,CustomerID=? WHERE AppointmentID=?");
-        $sql->bind_param("sssiii", $date, $time, $place, $doctorID, $customerID,$id);
+        $sql = $conn->prepare("UPDATE ratings SET Score=?,Comment=?,Date=?,DoctorID=? WHERE RatingID=?");
+        $sql->bind_param("sssii", $score, $comment, $date, $doctorID,$id);
 
         // Check if the query was successful
         if ($sql->execute()) {
-            echo "Appointment has been updated";
+            echo "Rating has been updated";
         }
 
     $sql->close();
