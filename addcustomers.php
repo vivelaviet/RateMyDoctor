@@ -19,11 +19,11 @@
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
     <?php
         include_once 'db.php';
-        $sql = "SELECT * FROM doctor";
+        $sql = "SELECT * FROM customer";
         $result = $conn->query($sql);
-        echo "<select name='doctorID'>";
+        echo "<select name='customerID'>";
         while ($results = $result->fetch_assoc()) {
-            echo "<option value='" . $results['DoctorID'] . "'>" . $results['FirstName'] . " ". $results['LastName'] . "</option>";
+            echo "<option value='" . $results['CustomerID'] . "'>" . $results['FirstName'] . " ". $results['LastName'] . "</option>";
         }
         echo "</select>";
         ?>
@@ -65,16 +65,16 @@
             echo mysql_error($conn);
 
         //validated your inputs fields
+        $customerID = $_POST['customerID'];
         $first = $_POST['first'];
         $last = $_POST['last'];
         $age = $_POST['age'];
         $password = $_POST['password'];
         $insurance = $_POST['insurance'];
-        $id=$_POST['id'];
 
 
         $sql = $conn->prepare("UPDATE customer SET FirstName=?, LastName=?, Password=?, Age=?, Insurance=? WHERE CustomerID=?");
-        $sql->bind_param("sssisi", $first, $last, $password, $age, $insurance, $id);
+        $sql->bind_param("sssisi", $first, $last, $password, $age, $insurance, $customerID);
 
         // Check if the query was successful
         if ($sql->execute()) {
