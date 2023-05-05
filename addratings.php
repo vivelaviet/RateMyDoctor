@@ -17,6 +17,7 @@
 <body>
     <h1>Add/Update Ratings</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
+        <label>Update?</label>
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM ratings";
@@ -27,10 +28,14 @@
         }
         echo "</select>";
         ?>
+        <label>Score:</label>
         <input type="number" class="form-control" name="score" placeholder="Score">
+        <label>Comment:</label>
         <input type="text" class="form-control" name="comment" placeholder="Comment">
+        <label>Date:</label>
         <input type="date" class="form-control" name="date" placeholder="Date">
         
+        <label>Doctor:</label>
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM doctor";
