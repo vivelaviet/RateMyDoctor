@@ -28,7 +28,7 @@
     <td>Time</td>
     <td>Place</td>
     <td>Doctor Name</td>
-    <td>CustomerID</td>
+    <td>Customer Name</td>
     </tr>
     <?php
     include_once 'db.php';
