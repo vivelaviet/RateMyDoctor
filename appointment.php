@@ -32,7 +32,7 @@
         <input type="date" class="form-control" name="date" placeholder="Date">
         <br /><label style= "font-size: 20px;">Time</label>
         <input type="time" class="form-control" name="time" placeholder="Time">
-        <br /><label style= "font-size: 20px;">place</label>
+        <br /><label style= "font-size: 20px;">Place</label>
         <input type="text" class="form-control" name="place" placeholder="Place">
         <br /><label style= "font-size: 20px;">Doctor Name:</label>
         <?php
