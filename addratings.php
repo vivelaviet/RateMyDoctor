@@ -17,7 +17,7 @@
 <body>
     <h1>Add/Update Ratings</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-    <?php
+        <?php
         include_once 'db.php';
         $sql = "SELECT * FROM ratings";
         $result = $conn->query($sql);
@@ -30,7 +30,18 @@
         <input type="number" class="form-control" name="score" placeholder="Score">
         <input type="text" class="form-control" name="comment" placeholder="Comment">
         <input type="date" class="form-control" name="date" placeholder="Date">
-        <input type="number" class="form-control" name="doctorID" placeholder="DoctorID"> 
+        
+        <?php
+        include_once 'db.php';
+        $sql = "SELECT * FROM doctor";
+        $result = $conn->query($sql);
+        echo "<select name='doctorID'>";
+        while ($results = $result->fetch_assoc()) {
+            echo "<option value='" . $results['DoctorID'] . "'>" . $results['FirstName'] . " ". $results['LastName'] . "</option>";
+        }
+        echo "</select>";
+        ?>
+
         <button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
         <button type="update" class="btn btn-primary" name="update" value="Update">Update</button>
     </form>
