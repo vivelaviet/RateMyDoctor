@@ -23,11 +23,11 @@
     <form action="" method="post">
     <table class="table">
     <tr>
-    <td>CustomerID</td>
-    <td>First Name</td>
-    <td>Last Name</td>
-    <td>Age</td>
-    <td>Insurance</td>
+    <td><strong>CustomerID</strong></td>
+    <td><strong>First Name</strong></td>
+    <td><strong>Last Name</strong></td>
+    <td><strong>Age</strong></td>
+    <td><strong>Insurance</strong></td>
     </tr>
     <?php
     include_once 'db.php';

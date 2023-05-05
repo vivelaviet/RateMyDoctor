@@ -23,11 +23,11 @@
     <form action="" method="post">
     <table class="table">
     <tr>
-    <td>RatingID</td>
-    <td>Score</td>
-    <td>Comment</td>
-    <td>Date</td>
-    <td>DoctorID</td>
+    <td><strong>RatingID</strong></td>
+    <td><strong>Score</strong></td>
+    <td><strong>Comment</strong></td>
+    <td><strong>Date</strong></td>
+    <td><strong>Doctor Name</strong></td>
     </tr>
     <?php
     include_once 'db.php';
@@ -43,14 +43,17 @@
     $result = $conn->query($sql);
     
     
-    
     if($result->num_rows > 0){
     while($results = $result->fetch_assoc()){
+    $sql1 = "SELECT FirstName, LastName FROM doctor WHERE DoctorID=" . $results['DoctorID'];
+    $result1 = $conn->query($sql1);
+    $doctor = $result1->fetch_assoc();
+    $fullname = $doctor['FirstName'] . ' ' . $doctor['LastName'];
     echo "<td>".$results['RatingID']."</td>";
     echo "<td>".$results['Score']."</td>";
     echo "<td>".$results['Comment']."</td>";
     echo "<td>".$results['Date']."</td>";
-    echo "<td>".$results['DoctorID']."</td>";
+    echo "<td>".$fullname."</td>";
     if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'customer') {
         echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteRating" value="'.$results['RatingID'].'" />Delete</button></td></tr>"';
     }

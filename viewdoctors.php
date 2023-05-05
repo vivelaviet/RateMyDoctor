@@ -29,13 +29,13 @@ if(!isset($_SESSION['role'])) {
     $_SESSION['role'] = 'customer';
 }
 if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'scheduler ' ) {
-    echo "<td>DoctorID</td>";
+    echo "<td><strong>DoctorID</strong></td>";
 }
 ?>
-<td>First Name</td>
-<td>Last Name</td>
-<td>Specialization</td>
-<td>Location</td>
+<td><strong>First Name</strong></td>
+<td><strong>Last Name</strong></td>
+<td><strong>Specialization</strong></td>
+<td><strong>Location</strong></td>
 </tr>
 
 
