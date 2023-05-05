@@ -17,7 +17,7 @@
 <body>
     <h1>Add/Update Appointments</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <label>Update?</label>
+        <br /><label style= "font-size: 20px;">For Update Use (Date, Place)</label><br />
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM appointment";
@@ -28,13 +28,13 @@
         }
         echo "</select>";
         ?>
-        <label>Date:</label>
+        <br /><br /><label style= "font-size: 20px;">Date</label>
         <input type="date" class="form-control" name="date" placeholder="Date">
-        <label>Time:</label>
+        <br /><label style= "font-size: 20px;">Time</label>
         <input type="time" class="form-control" name="time" placeholder="Time">
-        <label>Place:</label>
+        <br /><label style= "font-size: 20px;">place</label>
         <input type="text" class="form-control" name="place" placeholder="Place">
-        <label>Doctor:</label>
+        <br /><label style= "font-size: 20px;">Doctor Name:</label>
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM doctor";
@@ -45,7 +45,7 @@
         }
         echo "</select>";
         ?>
-        <label>Customer:</label>
+        <br /><br /><label style= "font-size: 20px;">Customer Name:</label>
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM customer";
@@ -56,7 +56,7 @@
         }
         echo "</select>";
         ?>
-
+        <br /><br />
         <button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
         <button type="update" class="btn btn-primary" name="update" value="Update">Update</button>
     </form>
