@@ -19,7 +19,7 @@
 
 <body>
 
-    <h1>View All Appointment</h1>
+    <h1>View All Appointments</h1>
     <form action="" method="post">
     <table class="table">
     <tr>
