@@ -16,6 +16,7 @@
 </header>
 <body>
     <h1>Add/Update Customer</h1>
+    <br /><label style= "font-size: 20px;">For Update Use (First Name, LastName)</label>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
     <?php
         include_once 'db.php';
@@ -27,11 +28,16 @@
         }
         echo "</select>";
         ?>
+        <br/><br/><label style= "font-size: 20px;">First Name</label>
         <input type="text" class="form-control" name="first" placeholder="First Name">
+        <br/><label style= "font-size: 20px;">Last Name</label>
         <input type="text" class="form-control" name="last" placeholder="Last Name">
+        <br/><label style= "font-size: 20px;">Age</label>
         <input type="number" class="form-control" name="age" placeholder="Age">
+        <br/><label style= "font-size: 20px;">Insurance</label>
         <input type="text" class="form-control" name="insurance" placeholder="Insurance"> 
-        <input type="text" class="form-control" name="password" placeholder="Password"> 
+        <br/><label style= "font-size: 20px;">Password</label>
+        <input type="text" class="form-control" name="password" placeholder="Password"><br/><br/> 
         <button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
         <button type="update" class="btn btn-primary" name="update" value="Update">Update</button>
     </form>

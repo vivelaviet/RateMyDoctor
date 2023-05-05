@@ -23,6 +23,7 @@
 
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
+        <br/><label style= "font-size: 20px;">For Update Use (First Name, Last Name)</label><br/>
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM doctor";
@@ -33,10 +34,15 @@
         }
         echo "</select>";
         ?>
+        <br/><br/><label style= "font-size: 20px;">First Name</label><br/>
         <input type="text" class="form-control" name="first" placeholder="First Name">
+        <br/><label style= "font-size: 20px;">Last Name</label><br/>
         <input type="text" class="form-control" name="last" placeholder="Last Name">
+        <br/><label style= "font-size: 20px;">Specialization</label><br/>
         <input type="text" class="form-control" name="specialization" placeholder="Specialization">
+        <br/><label style= "font-size: 20px;">Location</label><br/>
         <input type="text" class="form-control" name="location" placeholder="Location"> 
+        <br/>
         <button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
         <button type="update" class="btn btn-primary" name="update" value="Update">Update</button>
     </form>
