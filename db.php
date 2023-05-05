@@ -1,3 +1,4 @@
+<!-- Viet Nguyen wrote this part -->
 <?php
     // Server name must be localhost
     $servername = "localhost";
