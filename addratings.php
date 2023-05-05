@@ -17,7 +17,7 @@
 <body>
     <h1>Add/Update Ratings</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <label>Update?</label>
+        <label style= "font-size: 20px;">For Update Use (Score,Comment)</label> <br />
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM ratings";
@@ -28,14 +28,13 @@
         }
         echo "</select>";
         ?>
-        <label>Score:</label>
+        <br /><br /><label style= "font-size: 20px;">Score</label> <br />
         <input type="number" class="form-control" name="score" placeholder="Score">
-        <label>Comment:</label>
+        <br /><label style= "font-size: 20px;">Comment</label> <br />
         <input type="text" class="form-control" name="comment" placeholder="Comment">
-        <label>Date:</label>
-        <input type="date" class="form-control" name="date" placeholder="Date">
-        
-        <label>Doctor:</label>
+        <br /><label style= "font-size: 20px;">Date</label> <br />
+        <input type="date" class="form-control" name="date" placeholder="Date"> <br />
+        <label style= "font-size: 20px;">Doctor Name</label> <br />
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM doctor";
@@ -47,10 +46,9 @@
         echo "</select>";
         ?>
 
-        <button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
+        <br /><br /><button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
         <button type="update" class="btn btn-primary" name="update" value="Update">Update</button>
     </form>
-    
     <?php
     include_once 'db.php';
     $successMessage = "";
