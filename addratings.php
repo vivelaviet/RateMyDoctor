@@ -15,41 +15,43 @@
     ?>
 </header>
 <body>
-    <h1>Add Ratings</h1>
+    <h1>Add/Update Ratings</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <input type="number" class="form-control" name="id" placeholder="id for update ONLY">
-        <label >Score:</label>
-        <input type="number" class="form-control" name="score" placeholder="Score" > 
-        <label >Comment:</label>
-        <input type="text" class="form-control" name="comment" placeholder="Comment" >
-        <label >Date:</label>
-        <input type="date" class="form-control" name="date" placeholder="Date" >
-        <label >DoctorID:</label>
-        <input type="number" class="form-control" name="doctorID" placeholder="DoctorID" /><br>
+    <?php
+        include_once 'db.php';
+        $sql = "SELECT * FROM ratings";
+        $result = $conn->query($sql);
+        echo "<select name='ratingID'>";
+        while ($results = $result->fetch_assoc()) {
+            echo "<option value='" . $results['RatingID'] . "'>" . $results['Score'] . ", ". $results['Comment'] . "</option>";
+        }
+        echo "</select>";
+        ?>
+        <input type="number" class="form-control" name="score" placeholder="Score">
+        <input type="text" class="form-control" name="comment" placeholder="Comment">
+        <input type="date" class="form-control" name="date" placeholder="Date">
+        <input type="number" class="form-control" name="doctorID" placeholder="DoctorID"> 
         <button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
-        <button type="update" class="btn btn-primary" name="update" value="Update">Update</button> 
-	</form>
-
+        <button type="update" class="btn btn-primary" name="update" value="Update">Update</button>
+    </form>
     
     <?php
     include_once 'db.php';
     $successMessage = "";
     if (isset($_POST['add'])) {
-        
         if(!$conn)
             echo mysql_error($conn);
-            
-        // //validated your inputs fields
+
+        //validated your inputs fields
         $score = $_POST['score'];
         $comment = $_POST['comment'];
         $date = $_POST['date'];
         $doctorID = $_POST['doctorID'];
-        // //prepare and bind 
+        //prepare and bind 
         $sql = $conn->prepare("INSERT INTO ratings (Score,Comment,Date,DoctorID) VALUES (?,?,?,?)");
         $sql->bind_param("sssi", $score, $comment, $date, $doctorID);
-        
-        if ($sql->execute()) {
 
+        if ($sql->execute()) {
             echo("Rating has been added");
         }
 
@@ -61,26 +63,30 @@
             echo mysql_error($conn);
 
         //validated your inputs fields
+        $ratingID = $_POST['ratingID'];
         $score = $_POST['score'];
         $comment = $_POST['comment'];
         $date = $_POST['date'];
         $doctorID = $_POST['doctorID'];
-        $id=$_POST['id'];
 
-
-        $sql = $conn->prepare("UPDATE ratings SET Score=?,Comment=?,Date=?,DoctorID=? WHERE RatingID=?");
-        $sql->bind_param("sssii", $score, $comment, $date, $doctorID,$id);
+        $sql = $conn->prepare("UPDATE ratings SET Score=?, Comment=?, Date=?, DoctorID=? WHERE RatingID=?");
+        $sql->bind_param("sssii", $score, $comment, $date, $doctorID, $ratingID);
 
         // Check if the query was successful
         if ($sql->execute()) {
             echo "Rating has been updated";
+        } else {
+            echo "Error updating rating: " . $conn->error;
         }
 
     $sql->close();
     $conn->close();
     }   
-    ?>
+?>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+
 </body>

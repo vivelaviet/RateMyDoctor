@@ -37,15 +37,15 @@
         <input type="text" class="form-control" name="last" placeholder="Last Name">
         <input type="text" class="form-control" name="specialization" placeholder="Specialization">
         <input type="text" class="form-control" name="location" placeholder="Location"> 
-        <button type="update" class="btn btn-primary" name="update" value="Submit">Update</button>
-        <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
+        <button type="submit" class="btn btn-primary" name="add" value="Add">Add</button>
+        <button type="update" class="btn btn-primary" name="update" value="Update">Update</button>
     </form>
 
     <?php
     
     $successMessage = "";
     
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['add'])) {
         if(!$conn)
             echo mysql_error($conn);
 
