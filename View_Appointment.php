@@ -27,7 +27,7 @@
     <td>Date</td>
     <td>Time</td>
     <td>Place</td>
-    <td>DoctorID</td>
+    <td>Doctor Name</td>
     <td>CustomerID</td>
     </tr>
     <?php
@@ -47,12 +47,21 @@
     
     if($result->num_rows > 0){
     while($results = $result->fetch_assoc()){
+    $sql1 = "SELECT FirstName, LastName FROM doctor WHERE DoctorID=" . $results['DoctorID'];
+    $result1 = $conn->query($sql1);
+    $doctor = $result1->fetch_assoc();
+    $dfullname = $doctor['FirstName'] . ' ' . $doctor['LastName'];
+    
+    $sql2 = "SELECT FirstName, LastName FROM customer WHERE CustomerID=" . $results['CustomerID'];
+    $result2 = $conn->query($sql2);
+    $customer = $result2->fetch_assoc();
+    $cfullname = $customer['FirstName'] . ' ' . $customer['LastName'];
     echo "<td>".$results['AppointmentID']."</td>";
     echo "<td>".$results['Date']."</td>";
     echo "<td>".$results['Time']."</td>";
     echo "<td>".$results['Place']."</td>";
-    echo "<td>".$results['DoctorID']."</td>";
-    echo "<td>".$results['CustomerID']."</td>";
+    echo "<td>".$dfullname."</td>";
+    echo "<td>".$cfullname."</td>";
     if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'scheduler') {
         echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteAppointment" value="'.$results['AppointmentID'].'" />Delete</button></td></tr>"';
     }
