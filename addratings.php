@@ -17,7 +17,7 @@
 <body>
     <h1>Add/Update Ratings</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
-        <label style= "font-size: 20px;">For Update Use (Score,Comment)</label> <br />
+        <br /><label style= "font-size: 20px;">For Update Use (Score,Comment)</label> <br />
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM ratings";
