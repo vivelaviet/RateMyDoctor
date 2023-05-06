@@ -1,3 +1,6 @@
+<!-- Vincent Wen
+This code is a print the view of the appointment table using select
+For the user scheduler and the admin the it will allow the user to delete row in a appointment using delete -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +14,7 @@
 
 </head>
 <header>
+    <!-- include the header -->
 <?php 
     include_once 'header.php';
     ?>
@@ -18,7 +22,7 @@
 
 
 <body>
-
+    <!-- Creates table -->
     <h1>View All Appointment</h1>
     <form action="" method="post">
     <table class="table">
@@ -32,7 +36,7 @@
     </tr>
     <?php
     include_once 'db.php';
-
+    //uses the delete command to delete but only for scheduler or admin
     if(isset($_POST['deleteAppointment']) and is_numeric($_POST['deleteAppointment']))
     {
       $delete = $_POST['deleteAppointment'];
@@ -47,15 +51,17 @@
     
     if($result->num_rows > 0){
     while($results = $result->fetch_assoc()){
+        // uses the select the  doctor id to use for drop down menu
     $sql1 = "SELECT FirstName, LastName FROM doctor WHERE DoctorID=" . $results['DoctorID'];
     $result1 = $conn->query($sql1);
     $doctor = $result1->fetch_assoc();
     $dfullname = $doctor['FirstName'] . ' ' . $doctor['LastName'];
-    
+    // uses the select the  customer id to use for drop down menu
     $sql2 = "SELECT FirstName, LastName FROM customer WHERE CustomerID=" . $results['CustomerID'];
     $result2 = $conn->query($sql2);
     $customer = $result2->fetch_assoc();
     $cfullname = $customer['FirstName'] . ' ' . $customer['LastName'];
+    //print the information
     echo "<td>".$results['AppointmentID']."</td>";
     echo "<td>".$results['Date']."</td>";
     echo "<td>".$results['Time']."</td>";

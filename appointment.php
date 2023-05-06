@@ -1,3 +1,6 @@
+<!-- Vincent Wen
+The file add and update appointment into the appointment table
+only in the appointment and admin user -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,15 +12,18 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Home</title>
 </head>
+<!-- includes the header information -->
 <header>
 <?php 
     include_once 'header.php';
     ?>
 </header>
 <body>
+    <!-- for the format  -->
     <h1>Add/Update Appointments</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
         <br /><label style= "font-size: 20px;">For Update Use (Date, Place)</label><br />
+        <!-- for update use only -->
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM appointment";
@@ -28,6 +34,7 @@
         }
         echo "</select>";
         ?>
+        <!-- to add information or change  -->
         <br /><br /><label style= "font-size: 20px;">Date</label>
         <input type="date" class="form-control" name="date" placeholder="Date">
         <br /><label style= "font-size: 20px;">Time</label>
@@ -35,6 +42,7 @@
         <br /><label style= "font-size: 20px;">Place</label>
         <input type="text" class="form-control" name="place" placeholder="Place">
         <br /><label style= "font-size: 20px;">Doctor Name:</label>
+        <!-- gets from the database for doctor id from the doctor table -->
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM doctor";
@@ -46,6 +54,7 @@
         echo "</select>";
         ?>
         <br /><br /><label style= "font-size: 20px;">Customer Name:</label>
+        <!-- gets from the database for customer id from the customer table -->
         <?php
         include_once 'db.php';
         $sql = "SELECT * FROM customer";
@@ -74,7 +83,7 @@
         $place = $_POST['place'];
         $doctorID = $_POST['doctorID'];
         $customerID = $_POST['customerID'];
-        //prepare and bind 
+        //prepare and bind for adding new row into the appointment table using INSERT
         $sql = $conn->prepare("INSERT INTO appointment (Date,Time,Place,DoctorID,CustomerID) VALUES (?,?,?,?,?)");
         $sql->bind_param("sssii", $date, $time, $place, $doctorID, $customerID);
 
@@ -97,6 +106,7 @@
         $doctorID = $_POST['doctorID'];
         $customerID = $_POST['customerID'];
 
+        //updating the row of the appointment table
         $sql = $conn->prepare("UPDATE appointment SET Date=?, Time=?, Place=?, DoctorID=?, CustomerID=? WHERE AppointmentID=?");
         $sql->bind_param("sssiii", $date, $time, $place, $doctorID, $customerID, $appointmentID);
 

@@ -1,3 +1,6 @@
+<!-- Vincent Wen
+The file add and update customer into the customer table
+only in the customer and admin user -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,16 +12,19 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Home</title>
 </head>
+<!-- includes header -->
 <header>
 <?php 
     include_once 'header.php';
     ?>
 </header>
 <body>
+    <!-- format for the input information -->
     <h1>Add/Update Customer</h1>
     <br /><label style= "font-size: 20px;">For Update Use (First Name, LastName)</label>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  method="post">
     <?php
+        // SELECTS all the customer information  for the update option
         include_once 'db.php';
         $sql = "SELECT * FROM customer";
         $result = $conn->query($sql);
@@ -55,7 +61,7 @@
         $age = $_POST['age'];
         $password = $_POST['password'];
         $insurance = $_POST['insurance'];
-        //prepare and bind 
+        //prepare and bind for the  insert new information to the table for customer
         $sql = $conn->prepare("INSERT INTO customer (FirstName,LastName,Password,Age, Insurance) VALUES (?,?,?,?,?)");
         $sql->bind_param("sssis", $first, $last, $password, $age, $insurance);
 
@@ -78,7 +84,7 @@
         $password = $_POST['password'];
         $insurance = $_POST['insurance'];
 
-
+        //update the customer using UPDATE
         $sql = $conn->prepare("UPDATE customer SET FirstName=?, LastName=?, Password=?, Age=?, Insurance=? WHERE CustomerID=?");
         $sql->bind_param("sssisi", $first, $last, $password, $age, $insurance, $customerID);
 

@@ -1,3 +1,6 @@
+<!-- Vincent Wen
+This code is a print the view of the customer table using select
+For the user customer and the admin the it will allow the user to delete row in a customer using delete -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Home</title>
-
+<!-- gets the header -->
 </head>
 <header>
 <?php 
@@ -18,7 +21,7 @@
 
 
 <body>
-
+    <!-- format for the table -->
     <h1>View All Customers</h1>
     <form action="" method="post">
     <table class="table">
@@ -31,7 +34,7 @@
     </tr>
     <?php
     include_once 'db.php';
-
+//delete customer using DELETE
     if(isset($_POST['deleteCustomer']) and is_numeric($_POST['deleteCustomer']))
     {
       $delete = $_POST['deleteCustomer'];
@@ -44,7 +47,7 @@
     
     
     
-    
+    //prints the information
     if($result->num_rows > 0){
     while($results = $result->fetch_assoc()){
     echo "<td>".$results['CustomerID']."</td>";
@@ -53,7 +56,7 @@
     echo "<td>".$results['Age']."</td>";
     echo "<td>".$results['Insurance']."</td>";
     if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'customer') {
-        echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteCustomer" value="'.$results['CustomerID'].'" />Delete</button></td>"';
+        echo '<td><button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="deleteCustomer" value="'.$results['CustomerID'].'" />Delete</button></td></tr>"';
     }
     echo "</tr>";
     }
