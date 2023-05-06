@@ -1,3 +1,7 @@
+<!-- Rohan Govathoti completed all components of this file.
+The file provides search functionality to all user types so that
+a doctor can be queried by firstname, lastname, or location -->
+
 <!DOCTYPE html>
 <html lang="en">
 

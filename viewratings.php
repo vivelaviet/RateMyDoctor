@@ -1,3 +1,8 @@
+<!-- Rohan Govathoti completed all components of this file.
+This file contributed to meeting Functionality Set 4
+The file view and delete ratings into the ratings table
+only in the customer and admin user -->
+
 <!DOCTYPE html>
 <html lang="en">
 
