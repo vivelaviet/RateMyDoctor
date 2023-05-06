@@ -1,4 +1,6 @@
-<!-- Viet Nguyen wrote this part -->
+<!-- Viet Nguyen wrote this part
+Header that displays all the tabs. it also uses session variables to hide
+certain tab from different users. -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Rate my Doctor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

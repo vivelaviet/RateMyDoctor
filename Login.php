@@ -1,4 +1,8 @@
-<!-- Viet Nguyen wrote this part -->
+<!-- Viet Nguyen wrote this part 
+Implemented the three roles so that there is a variable that can be used within
+the session. This means that the roles can persist between pages. This was
+supposed to be for our fourth member but they are not showing up so we made
+do with simply buttons that picked your user role instead of a login/register page-->
 <!DOCTYPE html>
 <html lang="en">
 

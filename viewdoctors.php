@@ -1,4 +1,7 @@
-<!-- Viet Nguyen wrote this part -->
+<!-- Viet Nguyen wrote this part 
+Viet Nguyen added a simple view doctor functionality that displays the attributes
+of the doctor table from the SQL connection.
+○ This handles SELECT and DELETE of rows in the doctor table.-->
 <!DOCTYPE html>
 <html lang="en">
 

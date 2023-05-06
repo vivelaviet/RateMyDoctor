@@ -1,4 +1,6 @@
-<!-- Viet Nguyen wrote this part -->
+<!-- Viet Nguyen wrote this part 
+Responsible for INSERTS and UPDATES of doctors
+-->
 <!DOCTYPE html>
 <html lang="en">
 
